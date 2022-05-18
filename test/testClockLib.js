@@ -1,6 +1,8 @@
 const lib = require('../src/clockLib.js');
 const { convertMinutesToAngle } = lib;
 const { convertHoursToAngle } = lib;
+const { replaceHourDegree } = lib;
+const { replaceMinDegree } = lib;
 const { createClock } = lib;
 const assert = require('assert');
 
@@ -31,5 +33,17 @@ describe('createClock', () => {
   })
   it('should convert to clock object if hour is more than 12.', () => {
     return assert.deepStrictEqual(createClock('13:20'), { hour: 13, minutes: 20, hourHand: 40, minuteHand: 120 });
+  })
+});
+
+describe('replaceHourDegree', () => {
+  it('should replace hour in the css file.', () => {
+    return assert.strictEqual(replaceHourDegree('(__hour__deg)', { hourHand: 90 }), '(0deg)');
+  })
+});
+
+describe('replaceMinDegree', () => {
+  it('should replace min in the css file.', () => {
+    return assert.strictEqual(replaceMinDegree('(__min__deg)', { minuteHand: 90 }), '(0deg)');
   })
 });
