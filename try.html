@@ -1,0 +1,66 @@
+<html>
+
+<head>
+  <title>transform</title>
+  <style>
+    .minute {
+      position: relative;
+      top: 0px;
+      left: 0px;
+    }
+
+    .clock {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 300px auto;
+      width: 500px;
+      height: 500px;
+      border: 0.5px solid black;
+      border-radius: 50%;
+    }
+
+    .hour {
+      position: relative;
+      bottom: 801px;
+      left: 0px;
+    }
+
+    .hand {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .minute-hand {
+      transform: rotate(-90deg);
+      width: 450px;
+    }
+
+    .hour-hand {
+      transform: rotate(-90deg);
+      width: 300px;
+    }
+
+    .line {
+      width: 50%;
+      height: 0px;
+      border: 5px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="minute clock">
+    <div class="minute-hand hand">
+      <div class="line">
+      </div>
+    </div>
+  </div>
+  <div class="clock hour">
+    <div class="hour-hand hand">
+      <div class="line"></div>
+    </div>
+  </div>
+</body>
+
+</html>
