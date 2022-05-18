@@ -1,0 +1,32 @@
+figure {
+  margin: 0px 400px;
+  width: 300px;
+  height: 300px;
+}
+
+.hand {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.minute-hand {
+  position: relative;
+  top: 32px;
+  left: 605px;
+  transform: rotate(__min__deg);
+  width: 450px;
+}
+
+.hour-hand {
+  position: relative;
+  top: 23px;
+  left: 680px;
+  transform: rotate(__hour__deg);
+  width: 300px;
+}
+
+.line {
+  width: 50%;
+  height: 0px;
+  border: 5px solid black;
+}

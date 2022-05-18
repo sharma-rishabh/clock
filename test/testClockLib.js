@@ -3,7 +3,6 @@ const { convertMinutesToAngle } = lib;
 const { convertHoursToAngle } = lib;
 const { createClock } = lib;
 const assert = require('assert');
-const { DESTRUCTION } = require('dns');
 
 describe('convertMinutesToAngle', () => {
   it('should convert given zero minutes to angles.', () => {
