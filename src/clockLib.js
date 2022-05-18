@@ -18,21 +18,21 @@ const convertHoursToAngle = (hours, minutes) => {
   return hourAngle + minuteAngle;
 };
 
-const convertTimeToAngle = (time) => {
+const createClock = (time) => {
   const timeAsArray = time.split(':');
   const hour = getHour(timeAsArray);
   const minutes = getMinutes(timeAsArray);
-  const timeAngles = {};
+  const clock = {};
 
-  timeAngles.hour = hour;
-  timeAngles.minutes = minutes;
-  timeAngles.hourHand = convertHoursToAngle(hour, minutes);
-  timeAngles.minuteHand = convertMinutesToAngle(minutes);
+  clock.hour = hour;
+  clock.minutes = minutes;
+  clock.hourHand = convertHoursToAngle(hour, minutes);
+  clock.minuteHand = convertMinutesToAngle(minutes);
 
-  return timeAngles;
+  return clock;
 };
 
 exports.convertMinutesToAngle = convertMinutesToAngle;
 exports.convertHoursToAngle = convertHoursToAngle;
-exports.convertTimeToAngle = convertTimeToAngle;
+exports.createClock = createClock;
 
