@@ -4,14 +4,16 @@ const HourHandOneHour = 30;
 const MinuteHandInOneHour = 0.5;
 const MinuteHandInOneMinute = 6;
 const HoursInAClock = 12;
-const ZERO = 0;
-const ONE = 1;
 
 const convertMinutesToAngle = (minutes) => minutes * MinuteHandInOneMinute;
 
-const getHour = (timeAsArray) => +timeAsArray[ZERO];
-
-const getMinutes = (timeAsArray) => +timeAsArray[ONE];
+const currentTime = () => {
+  const date = new Date;
+  const hour = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
+  return { hour, minutes, seconds };
+};
 
 const convertHoursToAngle = (hours, minutes) => {
   const actualHour = hours >= HoursInAClock ? hours - HoursInAClock : hours;
@@ -20,16 +22,19 @@ const convertHoursToAngle = (hours, minutes) => {
   return hourAngle + minuteAngle;
 };
 
-const createClock = (time) => {
-  const timeAsArray = time.split(':');
-  const hour = getHour(timeAsArray);
-  const minutes = getMinutes(timeAsArray);
+const convertSecondsToAngle = (seconds) => {
+  return MinuteHandInOneMinute * seconds;
+};
+
+const createClock = ({ hour, minutes, seconds }) => {
   const clock = {};
 
   clock.hour = hour;
   clock.minutes = minutes;
+  clock.seconds = seconds;
   clock.hourHand = convertHoursToAngle(hour, minutes);
   clock.minuteHand = convertMinutesToAngle(minutes);
+  clock.secondHand = convertSecondsToAngle(seconds);
 
   return clock;
 };
@@ -48,11 +53,18 @@ const replaceMinDegree = (cssFile, { minuteHand }) => {
   return cssFile.replace(/__min__/, currentAngle);
 };
 
-const main = (time) => {
+const replaceSecDegree = (cssFile, { secondHand }) => {
+  const currentAngle = InitialAngle + secondHand;
+  return cssFile.replace(/__sec__/, currentAngle);
+};
+
+const main = () => {
   let cssFile = readFile('src/template.css');
+  const time = currentTime();
   const clock = createClock(time);
   cssFile = replaceHourDegree(cssFile, clock);
   cssFile = replaceMinDegree(cssFile, clock);
+  cssFile = replaceSecDegree(cssFile, clock);
   writeFile('./styles.css', cssFile);
 };
 
@@ -62,4 +74,3 @@ exports.createClock = createClock;
 exports.replaceHourDegree = replaceHourDegree;
 exports.replaceMinDegree = replaceMinDegree;
 exports.main = main;
-
